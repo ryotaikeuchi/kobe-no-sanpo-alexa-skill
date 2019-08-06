@@ -1,0 +1,250 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#1E2222"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 23,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common spacing values",
+            "dimensions": {
+                "spacingThin": 6,
+                "spacingSmall": 12,
+                "spacingMedium": 24,
+                "spacingLarge": 48,
+                "spacingExtraLarge": 72
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 60,
+                "marginRight": 60,
+                "marginBottom": 40
+            }
+        }
+    ],
+    "styles": {
+        "textStyleBase": {
+            "description": "Base font description; set color",
+            "values": [
+                {
+                    "color": "@colorTextPrimary"
+                }
+            ]
+        },
+        "textStyleBase0": {
+            "description": "Thin version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "100"
+            }
+        },
+        "textStyleBase1": {
+            "description": "Light version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "300"
+            }
+        },
+        "mixinBody": {
+            "values": {
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "mixinPrimary": {
+            "values": {
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "mixinSecondary": {
+            "values": {
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStylePrimary": {
+            "extend": [
+                "textStyleBase1",
+                "mixinPrimary"
+            ]
+        },
+        "textStyleSecondary": {
+            "extend": [
+                "textStyleBase0",
+                "mixinSecondary"
+            ]
+        },
+        "textStyleBody": {
+            "extend": [
+                "textStyleBase1",
+                "mixinBody"
+            ]
+        },
+        "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        }
+    },
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "when": "${viewport.shape == 'round'}",
+                "type": "Container",
+                "direction": "column",
+                "width": "100vw",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "Frame",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "backgroundColor": "#fff7e6", 
+                        "items": [
+                        {
+                            "type": "ScrollView",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "item": [
+                                {
+                                    "type": "Container",
+                                    "direction": "column",
+                                    "alignItems": "center",
+                                    "paddingLeft": "70dp",
+                                    "paddingRight": "70dp",
+                                    "paddingTop" : "5vh",
+                                    "paddingBottom" : "20vh",
+                                    "items": [
+                                        {
+                                            "type": "Image",
+                                            "width": "30vw",
+                                            "height": "10vh",
+                                            "source": "${payload.bodyTemplate2Data.personUrl}",
+                                            "scale": "best-fit",
+                                            "align": "${payload.bodyTemplate2Data.personAlign}"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "text": "<b>${payload.bodyTemplate2Data.textContent.prompt.text}</b>",
+                                            "style": "textStylePrimary",
+                                            "width": "70vw",
+                                            "textAlign": "left",
+                                            "paddingTop": "20dp"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]}
+                ]
+            },
+            {
+                "type": "Container",
+                "width": "100vw",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "AlexaHeader",
+                        "headerTitle": "${payload.bodyTemplate2Data.title}",
+                        "headerAttributionImage": "${payload.bodyTemplate2Data.logoUrl}"
+                    },
+                    {
+                        "type": "Frame",
+                        "width": "100vw",
+                        "height": "85vh",
+                        "backgroundColor": "#fff7e6", 
+                        "items": [
+                            {
+                                "type": "Container",
+                                "width": "100vw",
+                                "height": "85vh",
+                                "backgroundColor": "#fff7e6", 
+                                "items": [
+                                    {
+                                        "type": "Container",
+                                        "direction": "row",
+                                        "paddingLeft": "5vw",
+                                        "paddingRight": "5vw",
+                                        "paddingTop": "5vh",
+                                        "height": "60vh",
+                                        "width": "90vw",
+                                        "items": [
+                                            {
+                                                "type": "ScrollView",
+                                                "height": "100%",
+                                                "item": [
+                                                    {
+                                                        "type": "Container",
+                                                        "items": [
+                                                            {
+                                                                "type": "Text",
+                                                                "text": "<b>${payload.bodyTemplate2Data.textContent.prompt.text}</b>",
+                                                                "style": "textStylePrimary"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Container",
+                                        "direction": "row",
+                                        "paddingTop": "3vh",
+                                        "paddingLeft": "10vw",
+                                        "width": "100vw",
+                                        "height": "20vh",
+                                        "items": [
+                                            {
+                                                "type": "Image",
+                                                "width": "80vw",
+                                                "height": "15vh",
+                                                "source": "${payload.bodyTemplate2Data.personUrl}",
+                                                "scale": "best-fit",
+                                                "align": "${payload.bodyTemplate2Data.personAlign}"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
